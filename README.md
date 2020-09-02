@@ -2,11 +2,9 @@
 
 ddl-maker is generate ddl from Go struct.
 
-[![Build Status](https://travis-ci.org/kayac/ddl-maker.svg?branch=add-travis-config)](https://travis-ci.org/kayac/ddl-maker)
-
 # How to use
 
-**_example/example.go**
+**\_example/example.go**
 
 ```go
 package example
@@ -95,7 +93,7 @@ func (b Bookmark) Indexes() dialect.Indexes {
 }
 ```
 
-**_example/create_ddl/create_ddl.go**
+**\_example/create_ddl/create_ddl.go**
 
 ```go
 package main
@@ -165,6 +163,7 @@ func main() {
 	}
 }
 ```
+
 **create ddl**
 
 ```shell
@@ -234,31 +233,30 @@ CREATE TABLE `bookmark` (
 SET foreign_key_checks=1;
 ```
 
-___
+---
 
 ## Support Driver
 
 - MySQL
 
-
-## MySQL and Golang Type  Correspondence table
+## MySQL and Golang Type Correspondence table
 
 |        Golang Type        |   MySQL Column    |
 | :-----------------------: | :---------------: |
 |           int8            |      TINYINT      |
 |           int16           |     SMALLINT      |
 |           int32           |      INTGER       |
-|    int64, sql.NullInt64   |      BIGINT       |
+|   int64, sql.NullInt64    |      BIGINT       |
 |           uint8           | TINYINT unsigned  |
-|           uint16          | SMALLINT unsigned |
-|           uint32          | INTEGER unsigned  |
-|           uint64          |  BIGINT unsigned  |
+|          uint16           | SMALLINT unsigned |
+|          uint32           | INTEGER unsigned  |
+|          uint64           |  BIGINT unsigned  |
 |          float32          |       FLOAT       |
 | float64, sql.NullFloat64  |      DOUBLDE      |
 |  string, sql.NullString   |      VARCHAR      |
 |    bool, sql.NullBool     |    TINYINT(1)     |
 | time.Time, mysql.NullTime |     DATETIME      |
-|      json.RawMessage      |        JSON       |
+|      json.RawMessage      |       JSON        |
 
 [mysql.NullTime](https://godoc.org/github.com/go-sql-driver/mysql#NullTime) is from [github.com/go-sql-driver/mysql](https://github.com/go-sql-driver/mysql).
 
@@ -266,13 +264,13 @@ ___
 
 tag prefix is `ddl`
 
-|   TAG Value   |                  VALUE                   |
-| :-----------: | :--------------------------------------: |
-|     null      |        NULL  (DEFAULT `NOT NULL`)        |
-| size=`<size>` |         VARCHAR(`<size value>`)          |
-|     auto      |              AUTO INCREMENT              |
+|   TAG Value   |                       VALUE                        |
+| :-----------: | :------------------------------------------------: |
+|     null      |             NULL (DEFAULT `NOT NULL`)              |
+| size=`<size>` |              VARCHAR(`<size value>`)               |
+|     auto      |                   AUTO INCREMENT                   |
 | type=`<type>` | OVERRIDE struct type. <br> ex) string \`ddl:"text` |
-|      -        |            Don't define column           |
+|       -       |                Don't define column                 |
 
 ## How to Set PrimaryKey
 
