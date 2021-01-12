@@ -68,14 +68,15 @@ func (indexes Indexes) Sort() Indexes {
 }
 
 // New creates a Dialect and returns it.
-func New(driver, engine, charset string) (Dialect, error) {
+func New(driver, engine, charset string, collation string) (Dialect, error) {
 	var d Dialect
 
 	switch driver {
 	case "mysql":
 		d = &mysql.MySQL{
-			Engine:  engine,
-			Charset: charset,
+			Engine:    engine,
+			Charset:   charset,
+			Collation: collation,
 		}
 	default:
 		return d, fmt.Errorf("No such driver: %s", driver)

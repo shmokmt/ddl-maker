@@ -7,12 +7,12 @@ import (
 )
 
 func TestNew(t *testing.T) {
-	_, err := New("", "", "")
+	_, err := New("", "", "", "")
 	if err == nil {
 		t.Fatal("error not set driver")
 	}
 
-	_, err = New("mysql", "", "")
+	_, err = New("mysql", "", "", "")
 	if err != nil {
 		t.Fatalf("error new dialect:%s error", "mysql")
 	}

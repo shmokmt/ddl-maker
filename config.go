@@ -8,7 +8,8 @@ type Config struct {
 
 // DBConfig set user db environment
 type DBConfig struct {
-	Driver  string
-	Engine  string
-	Charset string
+	Driver    string
+	Engine    string
+	Charset   string
+	Collation string
 }

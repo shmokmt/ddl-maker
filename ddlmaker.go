@@ -34,7 +34,7 @@ type DDLMaker struct {
 
 // New creates a DDLMaker and returns it.
 func New(conf Config) (*DDLMaker, error) {
-	d, err := dialect.New(conf.DB.Driver, conf.DB.Engine, conf.DB.Charset)
+	d, err := dialect.New(conf.DB.Driver, conf.DB.Engine, conf.DB.Charset, conf.DB.Collation)
 	if err != nil {
 		return nil, errors.Wrap(err, "error dialect.New()")
 	}

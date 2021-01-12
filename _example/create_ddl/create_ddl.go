@@ -4,7 +4,7 @@ import (
 	"flag"
 	"log"
 
-	"github.com/kayac/ddl-maker"
+	ddlmaker "github.com/kayac/ddl-maker"
 	ex "github.com/kayac/ddl-maker/_example"
 )
 
@@ -14,6 +14,7 @@ func main() {
 		engine      string
 		charset     string
 		outFilePath string
+		collation   string
 	)
 	flag.StringVar(&driver, "d", "", "set driver")
 	flag.StringVar(&driver, "driver", "", "set driver")
@@ -23,6 +24,7 @@ func main() {
 	flag.StringVar(&engine, "engine", "InnoDB", "set driver engine")
 	flag.StringVar(&charset, "c", "utf8mb4", "set driver charset")
 	flag.StringVar(&charset, "charset", "utf8mb4", "set driver charset")
+	flag.StringVar(&collation, "collation", "", "set driver collation")
 	flag.Parse()
 
 	if driver == "" {
@@ -36,9 +38,10 @@ func main() {
 
 	conf := ddlmaker.Config{
 		DB: ddlmaker.DBConfig{
-			Driver:  driver,
-			Engine:  engine,
-			Charset: charset,
+			Driver:    driver,
+			Engine:    engine,
+			Charset:   charset,
+			Collation: collation,
 		},
 		OutFilePath: outFilePath,
 	}

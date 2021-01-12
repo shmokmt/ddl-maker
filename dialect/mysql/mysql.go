@@ -14,8 +14,9 @@ const (
 
 // MySQL XXX
 type MySQL struct {
-	Engine  string
-	Charset string
+	Engine    string
+	Charset   string
+	Collation string
 }
 
 // Index XXX
@@ -56,6 +57,19 @@ func (mysql MySQL) FooterTemplate() string {
 
 // TableTemplate XXX
 func (mysql MySQL) TableTemplate() string {
+	if mysql.Collation != "" {
+		return `
+DROP TABLE IF EXISTS {{ .Name }};
+
+CREATE TABLE {{ .Name }} (
+    {{ range .Columns }}{{ .ToSQL }},
+    {{ end }}{{ range .Indexes.Sort  }}{{ .ToSQL }},
+    {{end}}{{ .PrimaryKey.ToSQL }}
+) ENGINE={{ .Dialect.Engine }} DEFAULT CHARACTER SET {{ .Dialect.Charset }} COLLATE {{ .Dialect.Collation }};
+
+`
+
+	}
 	return `
 DROP TABLE IF EXISTS {{ .Name }};
 
